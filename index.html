@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeriSense – Smart Agri-Goods Monitoring</title>
+    <meta name="description"
+        content="PeriSense ensures the safety and freshness of fruits, vegetables, and high-value agricultural goods from farm to fork.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Agri-Theme Colors */
+            --primary-green: #16A34A;
+            /* Green 600 */
+            --secondary-green: #4ADE80;
+            /* Green 400 */
+            --dark-green: #14532D;
+            /* Green 900 */
+            --text-gray: #475569;
+            /* Slate 600 */
+            --light-bg: #F0FDF4;
+            /* Green 50 */
+            --white: #FFFFFF;
+            --border-color: #DCFCE7;
+            /* Green 100 */
+
+            --transition: all 0.3s ease;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-green);
+            background-color: var(--light-bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: var(--dark-green);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* Utilities */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-primary {
+            color: var(--primary-green);
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+
+        .mb-12 {
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            background-color: #15803D;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            margin-left: 16px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-green);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark-green);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--primary-green);
+        }
+
+        .logo svg {
+            color: var(--primary-green);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-gray);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        #hero {
+            padding-top: 160px;
+            padding-bottom: 100px;
+            background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+        }
+
+        .hero-bg-accent {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(22, 163, 74, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* About Section */
+        #about {
+            background-color: var(--white);
+        }
+
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        /* Problem Section */
+        #problem {
+            background-color: var(--light-bg);
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: #DCFCE7;
+            color: var(--primary-green);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+
+        .problem-card {
+            background: var(--white);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            background-color: #F0FDF4;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+        }
+
+        .problem-title {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .problem-desc {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Solution Section */
+        #solution {
+            background-color: var(--dark-green);
+            color: var(--white);
+        }
+
+        #solution h2 {
+            color: var(--white);
+        }
+
+        #solution p {
+            color: #BBF7D0;
+        }
+
+        #solution .section-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #4ADE80;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .solution-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .solution-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .solution-icon {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        /* Features Section */
+        #features {
+            background-color: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 24px;
+        }
+
+        .feature-icon-circle {
+            width: 80px;
+            height: 80px;
+            background: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .feature-item:hover .feature-icon-circle {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+
+        /* Team Section (New) */
+        #team {
+            background-color: var(--light-bg);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            justify-items: center;
+        }
+
+        .team-member {
+            background: var(--white);
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            width: 100%;
+            max-width: 280px;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .member-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 16px;
+            background-color: #DCFCE7;
+            border: 3px solid var(--primary-green);
+        }
+
+        .member-name {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .member-role {
+            font-size: 0.9rem;
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        /* Target Markets */
+        #markets {
+            background-color: var(--white);
+        }
+
+        .market-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .market-chip {
+            background: var(--light-bg);
+            padding: 16px 32px;
+            border-radius: 50px;
+            box-shadow: var(--shadow-sm);
+            font-weight: 500;
+            color: var(--dark-green);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .market-chip:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+            background: var(--white);
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: var(--light-bg);
+        }
+
+        .contact-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: #F8FAFC;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+            background-color: var(--white);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-green);
+            color: #BBF7D0;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 16px;
+            }
+        }
+
+        /* Icons (SVG placeholders) */
+        svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <!-- Leaf Icon for Agri Theme -->
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.22,6.22,0,0,0,1.75,3.75C7,13,17,8,17,8Z" />
+                    </svg>
+                    PeriSense
+                </a>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#features">Features</a>
+                    <a href="#team">Team</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="mobile-menu-btn">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="hero-bg-accent"></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="section-tag">Smart Agri-Tech</span>
+                <h1 class="hero-title">Preserving Freshness from Farm to Fork</h1>
+                <p class="hero-subtitle">Advanced monitoring to minimize spoilage and maximize quality for fruits,
+                    vegetables, and perishables.</p>
+                <div>
+                    <a href="#contact" class="btn btn-primary">Get Started</a>
+                    <a href="#contact" class="btn btn-outline">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-tag">Our Mission</span>
+                <h2 class="mb-8">About PeriSense</h2>
+                <p class="about-text">
+                    PeriSense is dedicated to revolutionizing the agriculture supply chain. We create intelligent
+                    sensors that protect fresh produce, reducing the billions lost annually to spoilage and ensuring
+                    healthy, high-quality food reaches communities worldwide.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="problem">
+        <div class="container">
+            <div class="text-center section-header">
+                <span class="section-tag">The Challenge</span>
+                <h2>Why Freshness Fades</h2>
+                <p class="mb-4" style="color: var(--text-gray);">40% of food is wasted before it hits the shelf.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="icon-box">
+                        <!-- Thermometer -->
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M15 13V5c0-1.66-1.34-3-3-3S9 3.34 9 5v8c-1.21.91-2 2.37-2 4 0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.63-.79-3.09-2-4zm-4-8c0-.55.45-1 1-1s1 .45 1 1v1h-2V5z" />
+                        </svg>
+                    </div>
+                    <h3 class="problem-title">Field Heat & Temp Spikes</h3>
+                    <p class="problem-desc">Improper cooling after harvest accelerates decay in sensitive crops like
+                        berries and leafy greens.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon-box">
+                        <!-- Gas/Cloud -->
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                        </svg>
+                    </div>
+                    <h3 class="problem-title">Ethylene Buildup</h3>
+                    <p class="problem-desc">Invisible ripening gases can cause entire shipments of fruits to spoil
+                        overnight.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon-box">
+                        <!-- Clock/Delay -->
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                        </svg>
+                    </div>
+                    <h3 class="problem-title">In-Transit Delays</h3>
+                    <p class="problem-desc">Lack of visibility during shipping leads to rejected loads and financial
+                        loss.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solution">
+        <div class="container">
+            <div class="text-center section-header">
+                <span class="section-tag">Our Solution</span>
+                <h2>Smart Protection for Harvests</h2>
+                <p>End-to-end monitoring tailored for the agricultural sector.</p>
+            </div>
+            <div class="solution-grid">
+                <div class="solution-card text-center">
+                    <span class="solution-icon">🌡️</span>
+                    <h3>Precise Climate Control</h3>
+                    <p>Track temperature and humidity to maintain the perfect VPD (Vapor Pressure Deficit).</p>
+                </div>
+                <div class="solution-card text-center">
+                    <span class="solution-icon">🍏</span>
+                    <h3>Ripening Detection</h3>
+                    <p>Sensors detect ethylene levels to predict and prevent premature ripening.</p>
+                </div>
+                <div class="solution-card text-center">
+                    <span class="solution-icon">📍</span>
+                    <h3>Farm-to-Market Track</h3>
+                    <p>Real-time location and status from the field to the distribution center.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <div class="text-center section-header">
+                <span class="section-tag">Key Features</span>
+                <h2>Built for Agriculture</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon-circle">
+                        <!-- Sensor Icon -->
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2c-4.97 0-9 4.03-9 9 0 4.97 4.03 9 9 9s9-4.03 9-9c0-4.97-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z" />
+                            <circle cx="12" cy="11" r="2" />
+                        </svg>
+                    </div>
+                    <h3>Rugged IoT Sensors</h3>
+                    <p class="text-gray">Durable sensors designed to withstand field conditions and cold storage.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon-circle">
+                        <!-- Dashboard Icon -->
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" />
+                        </svg>
+                    </div>
+                    <h3>Crop Analytics</h3>
+                    <p class="text-gray">Data models tuned for specific produce types (e.g., Bananas vs. Berries).</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon-circle">
+                        <!-- Alert Icon -->
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
+                        </svg>
+                    </div>
+                    <h3>Spoilage Alerts</h3>
+                    <p class="text-gray">Instant notifications when environmental conditions threaten quality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW TEAM SECTION -->
+    <section id="team">
+        <div class="container">
+            <div class="text-center section-header">
+                <span class="section-tag">Visionaries</span>
+                <h2>Meet Our Founders</h2>
+                <p class="text-gray mb-4">The team driving innovation in food security.</p>
+            </div>
+            <div class="team-grid">
+                <!-- Using placeholder images from the folder -->
+                <div class="team-member">
+                    <img src="./Picture1.png" alt="Tharunkumar" class="member-img">
+                    <h3 class="member-name">Tharunkumar</h3>
+                    <p class="member-role">Co-Founder</p>
+                </div>
+                <div class="team-member">
+                    <img src="./Picture2.png" alt="Suhash" class="member-img">
+                    <h3 class="member-name">Suhash</h3>
+                    <p class="member-role">Co-Founder</p>
+                </div>
+                <div class="team-member">
+                    <img src="./Picture3.png" alt="Mothi" class="member-img">
+                    <h3 class="member-name">Mothi</h3>
+                    <p class="member-role">Co-Founder</p>
+                </div>
+                <div class="team-member">
+                    <img src="./Picture4.png" alt="Nitheesh" class="member-img">
+                    <h3 class="member-name">Nitheesh</h3>
+                    <p class="member-role">Co-Founder</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="markets">
+        <div class="container">
+            <div class="text-center section-header">
+                <span class="section-tag">Industries</span>
+                <h2>Target Sectors</h2>
+            </div>
+            <div class="market-list">
+                <div class="market-chip">🥕 Fresh Produce Logistics</div>
+                <div class="market-chip">🚜 Farm-to-Table</div>
+                <div class="market-chip">📦 Cold Storage</div>
+                <div class="market-chip">🚢 Food Exports</div>
+                <div class="market-chip">🏪 Retail Grocery</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="text-center section-header">
+                <span class="section-tag">Get In Touch</span>
+                <h2>Partner With Us</h2>
+                <p class="text-gray">Let's reduce waste and improve quality together.</p>
+            </div>
+            <div class="contact-wrapper">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" id="email" class="form-input" placeholder="email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Subject</label>
+                        <select id="subject" class="form-input">
+                            <option value="Inquiry">General Inquiry</option>
+                            <option value="Funding">Investment & Funding Proposal</option>
+                            <option value="Partnership">Partnership</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea id="message" class="form-textarea" placeholder="How can we help you?"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+
+                <div class="contact-info">
+                    <span>📧 mothibalaajiv.23cse@kongu.edu</span>
+                    <span>📧 suhashv.23cse@kongu.edu</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">PeriSense</div>
+                <div class="footer-links">
+                    <a href="#">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#features">Features</a>
+                    <a href="#team">Team</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2026 PeriSense – Smart Agri-Goods Monitoring.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Contact Form Mailto Logic
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const userEmail = document.getElementById('email').value;
+            const subjectSelect = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            const recipient = "mothibalaajiv.23cse@kongu.edu,suhashv.23cse@kongu.edu";
+            const subject = encodeURIComponent(`PeriSense Inquiry: ${subjectSelect} - from ${name}`);
+
+            let bodyContent = `Name: ${name}%0D%0AEmail: ${userEmail}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+
+            if (subjectSelect === 'Funding') {
+                bodyContent = `Name: ${name}%0D%0AEmail: ${userEmail}%0D%0A%0D%0ARE: Funding & Investment Proposal%0D%0A%0D%0ADear PeriSense Team,%0D%0A%0D%0AWe are interested in discussing investment opportunities with PeriSense. We see great potential in your smart agri-goods monitoring system.%0D%0A%0D%0A${message}`;
+            }
+
+            const body = encodeURIComponent(bodyContent);
+
+            window.location.href = `mailto:${recipient}?subject=${subject}&body=${bodyContent}`; // Note: bodyContent is already encoded in the template for simplicity, but for robustness we should use body
+            window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Simple fade-in animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Apply animation styles and observe elements
+        document.querySelectorAll('section > div').forEach((el) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
