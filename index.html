@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PeriSense – Smart Goods Monitoring</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --secondary: #0f172a;
+      --light-bg: #f9fafb;
+      --card-bg: #ffffff;
+      --text: #111827;
+      --text-light: #6b7280;
+      --accent: #e0f2fe;
+      --border: #e5e7eb;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      background: var(--light-bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    /* Header & Navigation */
+    header {
+      background-color: var(--secondary);
+      color: white;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .logo i {
+      color: var(--primary);
+      font-size: 1.8rem;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--secondary) 0%, #1e293b 100%);
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: background-color 0.3s;
+    }
+    
+    .cta-button:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    /* Main Content */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    
+    section {
+      margin-bottom: 4rem;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid var(--accent);
+      display: inline-block;
+    }
+    
+    /* Team Section */
+    .team-section {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .team-card {
+      text-align: center;
+      background: var(--light-bg);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    .team-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1rem;
+      border: 4px solid var(--primary);
+    }
+    
+    .team-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 0.3rem;
+    }
+    
+    .team-role {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .team-desc {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+    
+    /* Content Sections */
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    
+    .content-card {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+    
+    .content-card h3 {
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .content-card ul {
+      padding-left: 1.2rem;
+    }
+    
+    .content-card li {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Highlight Section */
+    .highlight {
+      background: linear-gradient(to right, var(--accent), #f0f9ff);
+      padding: 2.5rem;
+      border-radius: 10px;
+      margin-top: 3rem;
+      border-left: 5px solid var(--primary);
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--secondary);
+      color: white;
+      padding: 3rem 2rem 1.5rem;
+      text-align: center;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-section h3 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .footer-section p, .footer-section a {
+      color: #cbd5e1;
+      margin-bottom: 0.5rem;
+      display: block;
+      text-decoration: none;
+    }
+    
+    .footer-section a:hover {
+      color: var(--primary);
+    }
+    
+    .copyright {
+      padding-top: 1.5rem;
+      border-top: 1px solid #334155;
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .team-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+      
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .highlight {
+        padding: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero {
+        padding: 3rem 1rem;
+      }
+      
+      .container {
+        padding: 20px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with Navigation -->
+  <header>
+    <nav>
+      <div class="logo">
+        <i class="fas fa-temperature-low"></i>
+        <span>PeriSense</span>
+      </div>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#solution">Solution</a>
+        <a href="#team">Team</a>
+        <a href="#markets">Markets</a>
+        <a href="#investment">Investment</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Smart Goods Monitoring for the Modern Supply Chain</h1>
+      <p>PeriSense ensures the safety, quality, and integrity of perishable and high-value goods throughout storage and transportation.</p>
+      <a href="#investment" class="cta-button">Explore Investment Opportunity</a>
+    </div>
+  </section>
+
+  <!-- Main Content Container -->
+  <div class="container">
+    <!-- About Section -->
+    <section id="about">
+      <h2 class="section-title">About PeriSense</h2>
+      <p>
+        <strong>PeriSense</strong> is a startup-driven smart goods monitoring system designed to ensure the safety,
+        quality, and integrity of perishable and high-value goods throughout storage and transportation.
+      </p>
+      
+      <div class="content-grid">
+        <div class="content-card">
+          <h3><i class="fas fa-exclamation-triangle"></i> The Problem We Solve</h3>
+          <ul>
+            <li>Temperature and humidity fluctuations</li>
+            <li>Undetected gas emissions and spoilage</li>
+            <li>Lack of real-time visibility during transit</li>
+            <li>Manual monitoring and delayed interventions</li>
+          </ul>
+        </div>
+        
+        <div class="content-card">
+          <h3><i class="fas fa-bullseye"></i> Our Solution</h3>
+          <ul>
+            <li>Temperature monitoring</li>
+            <li>Humidity tracking</li>
+            <li>Gas emission detection</li>
+            <li>Storage and transit status monitoring</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team-section">
+      <h2 class="section-title">Leadership Team</h2>
+      <div class="team-grid">
+        <!-- Co-Founder 1 -->
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=250&q=80" alt="Alex Johnson" class="team-img">
+          <h3 class="team-name">Alex Johnson</h3>
+          <p class="team-role">Co-Founder & CEO</p>
+          <p class="team-desc">Former logistics executive with 15+ years in supply chain management. MSc in Industrial Engineering.</p>
+        </div>
+        
+        <!-- Co-Founder 2 -->
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=250&q=80" alt="Samantha Chen" class="team-img">
+          <h3 class="team-name">Samantha Chen</h3>
+          <p class="team-role">Co-Founder & CTO</p>
+          <p class="team-desc">IoT specialist with PhD in Sensor Technology. Led R&D at two successful hardware startups.</p>
+        </div>
+        
+        <!-- Mentor 1 -->
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=250&q=80" alt="Dr. Robert Hayes" class="team-img">
+          <h3 class="team-name">Dr. Robert Hayes</h3>
+          <p class="team-role">Lead Mentor & Advisor</p>
+          <p class="team-desc">Former VP at Global Logistics Inc. Board member of three successful logistics tech companies.</p>
+        </div>
+        
+        <!-- Mentor 2 -->
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=250&q=80" alt="Maria Rodriguez" class="team-img">
+          <h3 class="team-name">Maria Rodriguez</h3>
+          <p class="team-role">Technology Mentor</p>
+          <p class="team-desc">AI/ML expert with 20+ patents in predictive analytics. Advisor to multiple tech accelerators.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="solution">
+      <h2 class="section-title">Key Features</h2>
+      <div class="content-grid">
+        <div class="content-card">
+          <h3><i class="fas fa-satellite-dish"></i> IoT-Based Sensor Network</h3>
+          <p>Deployable wireless sensors that continuously monitor environmental conditions in real-time.</p>
+        </div>
+        
+        <div class="content-card">
+          <h3><i class="fas fa-chart-line"></i> Real-Time Dashboard</h3>
+          <p>Comprehensive analytics platform with visualization tools for supply chain visibility.</p>
+        </div>
+        
+        <div class="content-card">
+          <h3><i class="fas fa-bell"></i> Smart Alerts & Notifications</h3>
+          <p>Instant alerts via SMS, email, or app when conditions deviate from preset thresholds.</p>
+        </div>
+        
+        <div class="content-card">
+          <h3><i class="fas fa-robot"></i> AI-Driven Insights</h3>
+          <p>Predictive analytics to forecast potential issues before they impact your goods (Roadmap).</p>
+        </div>
+        
+        <div class="content-card">
+          <h3><i class="fas fa-shield-alt"></i> Secure & Scalable Architecture</h3>
+          <p>Enterprise-grade security with cloud infrastructure that scales with your operations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Markets Section -->
+    <section id="markets">
+      <h2 class="section-title">Target Markets</h2>
+      <div class="content-grid">
+        <div class="content-card">
+          <h3><i class="fas fa-snowflake"></i> Cold-chain Logistics</h3>
+          <p>Temperature-sensitive pharmaceuticals, biologics, and perishable food items.</p>
+        </div>
+        
+        <div class="content-card">
+          <h3><i class="fas fa-apple-alt"></i> Food & Agriculture</h3>
+          <p>From farm to table monitoring for fresh produce, dairy, meat, and seafood.</p>
+        </div>
+        
+        <div class="content-card">
+          <h3><i class="fas fa-pills"></i> Pharmaceutical Distribution</h3>
+          <p>Compliance monitoring for vaccines, medications, and medical supplies.</p>
+        </div>
+        
+        <div class="content-card">
+          <h3><i class="fas fa-warehouse"></i> Warehousing & Storage</h3>
+          <p>Smart monitoring for inventory management in warehouses and distribution centers.</p>
+        </div>
+        
+        <div class="content-card">
+          <h3><i class="fas fa-globe"></i> Export–Import Businesses</h3>
+          <p>Cross-border monitoring for goods in transit across different climate zones.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Investment Section -->
+    <section id="investment">
+      <div class="highlight">
+        <h2 class="section-title">Investment Opportunity</h2>
+        <p>
+          PeriSense operates at the intersection of IoT, AI, and logistics—positioned for rapid growth,
+          enterprise partnerships, and global scaling. We are seeking strategic investors to help us expand
+          our sensor network, enhance our AI capabilities, and enter new vertical markets.
+        </p>
+        <p style="margin-top: 1rem;">
+          <strong>Current Funding Round:</strong> Seed Round ($2M) <br>
+          <strong>Valuation:</strong> $12M pre-money <br>
+          <strong>Traction:</strong> 15 pilot customers, 3 Letters of Intent from Fortune 500 companies
+        </p>
+        <a href="#contact" class="cta-button" style="margin-top: 1.5rem;">Request Investor Deck</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>PeriSense</h3>
+        <p>Smart goods monitoring for the modern supply chain. Ensuring quality, safety, and integrity from origin to destination.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p><i class="fas fa-envelope"></i> contact@perisense.com</p>
+        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+        <p><i class="fas fa-map-marker-alt"></i> San Francisco, CA</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="#about">About</a>
+        <a href="#solution">Solution</a>
+        <a href="#team">Team</a>
+        <a href="#markets">Markets</a>
+        <a href="#investment">Investment</a>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      © 2026 PeriSense – Smart Goods Monitoring System. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if(targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if(targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // Close mobile menu if open
+          if(window.innerWidth <= 768) {
+            document.querySelector('.nav-links').style.display = 'none';
+          }
+        }
+      });
+    });
+    
+    // Update year in copyright
+    document.addEventListener('DOMContentLoaded', function() {
+      const year = new Date().getFullYear();
+      const copyrightElements = document.querySelectorAll('.copyright');
+      copyrightElements.forEach(el => {
+        el.innerHTML = el.innerHTML.replace('2026', year);
+      });
+    });
+  </script>
+</body>
+</html>
